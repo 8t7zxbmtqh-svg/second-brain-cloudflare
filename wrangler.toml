@@ -9,4 +9,4 @@ binding = "ASSETS"
 [[d1_databases]]
 binding = "DB"
 database_name = "second-brain-db"
-database_id = "d53169d0-93b0-4dd9-909a-4d54315557d6"
+database_id = "d531690d-93b0-4dd9-909a-4d54315557d6"
