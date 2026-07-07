@@ -55,7 +55,7 @@ async function handleApi(request, env, url) {
       id: item.id || randomId(),
       title: String(item.title || "Senza titolo").slice(0, 160),
       body: String(item.body || ""),
-      kind: ["task", "note", "person", "project"].includes(item.kind) ? item.kind : "note",
+      kind: ["task", "note", "person", "project", "email", "brief"].includes(item.kind) ? item.kind : "note",
       priority: ["high", "normal", "low"].includes(item.priority) ? item.priority : "normal",
       due: item.due || "",
       tags: Array.isArray(item.tags) ? item.tags.map(String) : [],

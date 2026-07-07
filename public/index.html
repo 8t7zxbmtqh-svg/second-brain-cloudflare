@@ -2,73 +2,60 @@
 <html lang="it">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="theme-color" content="#1f7a6d">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#f5f7fb">
   <link rel="manifest" href="/manifest.webmanifest">
-  <title>Assistente IA Personale</title>
+  <title>Second Brain AI</title>
   <style>
     :root {
       color-scheme: light dark;
-      --ink: #171b20;
-      --muted: #66717d;
-      --line: rgba(95, 112, 130, .22);
-      --panel: rgba(255, 255, 255, .76);
-      --panel-strong: rgba(255, 255, 255, .9);
-      --soft: rgba(255, 255, 255, .52);
-      --surface: #eef3f4;
-      --accent: #176d67;
-      --accent-2: #315fd8;
-      --accent-soft: rgba(23, 109, 103, .14);
-      --warn: #9a620d;
-      --danger: #9f2637;
-      --shadow: 0 22px 70px rgba(24, 35, 44, .14);
-      --blur: blur(24px) saturate(1.35);
+      --bg: #f3f6fb;
+      --ink: #101318;
+      --muted: #687281;
+      --line: rgba(34, 43, 55, .12);
+      --glass: rgba(255, 255, 255, .72);
+      --glass-strong: rgba(255, 255, 255, .92);
+      --soft: rgba(17, 24, 39, .055);
+      --blue: #2663ff;
+      --mint: #12b886;
+      --coral: #ff6b6b;
+      --amber: #f59f00;
+      --violet: #7c3aed;
+      --shadow: 0 22px 70px rgba(30, 41, 59, .14);
+      --blur: blur(28px) saturate(1.35);
       font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
     }
     @media (prefers-color-scheme: dark) {
       :root {
-        --ink: #f3f7fb;
-        --muted: #9da8b4;
-        --line: rgba(210, 222, 235, .16);
-        --panel: rgba(22, 28, 36, .68);
-        --panel-strong: rgba(24, 31, 39, .86);
+        --bg: #0f1217;
+        --ink: #f4f7fb;
+        --muted: #9aa6b7;
+        --line: rgba(226, 232, 240, .14);
+        --glass: rgba(24, 29, 38, .72);
+        --glass-strong: rgba(29, 35, 45, .92);
         --soft: rgba(255, 255, 255, .08);
-        --surface: #0f141a;
-        --accent: #5ad4c8;
-        --accent-2: #88a8ff;
-        --accent-soft: rgba(90, 212, 200, .16);
-        --warn: #f2be63;
-        --danger: #ff8898;
-        --shadow: 0 24px 80px rgba(0, 0, 0, .32);
+        --shadow: 0 24px 80px rgba(0, 0, 0, .38);
       }
     }
     * { box-sizing: border-box; }
-    html { min-height: 100%; background: var(--surface); }
+    html { min-height: 100%; background: var(--bg); }
     body {
       margin: 0;
       min-height: 100vh;
       color: var(--ink);
       background:
-        radial-gradient(circle at 12% -8%, rgba(49, 95, 216, .18), transparent 28rem),
-        radial-gradient(circle at 88% 6%, rgba(23, 109, 103, .18), transparent 24rem),
-        linear-gradient(160deg, #f7fafb 0%, #edf3f5 42%, #e8eef2 100%);
-      background-attachment: fixed;
+        radial-gradient(circle at 8% -6%, rgba(38, 99, 255, .18), transparent 26rem),
+        radial-gradient(circle at 88% 4%, rgba(18, 184, 134, .16), transparent 24rem),
+        radial-gradient(circle at 48% 100%, rgba(255, 107, 107, .12), transparent 28rem),
+        var(--bg);
       -webkit-font-smoothing: antialiased;
       text-rendering: optimizeLegibility;
-    }
-    @media (prefers-color-scheme: dark) {
-      body {
-        background:
-          radial-gradient(circle at 12% -8%, rgba(49, 95, 216, .28), transparent 28rem),
-          radial-gradient(circle at 88% 6%, rgba(23, 109, 103, .24), transparent 24rem),
-          linear-gradient(160deg, #111821 0%, #0f141a 52%, #151920 100%);
-      }
     }
     button, input, textarea, select { font: inherit; }
     button, input, textarea, select {
       border: 1px solid var(--line);
       border-radius: 8px;
-      background: var(--panel-strong);
+      background: var(--glass-strong);
       color: var(--ink);
     }
     button {
@@ -78,351 +65,234 @@
       transition: transform .18s ease, border-color .18s ease, background .18s ease, box-shadow .18s ease;
       -webkit-tap-highlight-color: transparent;
     }
-    button:hover { border-color: rgba(100, 116, 139, .48); transform: translateY(-1px); }
+    button:hover { transform: translateY(-1px); border-color: rgba(38, 99, 255, .34); }
     button:active { transform: translateY(0) scale(.985); }
     input, select { min-height: 42px; padding: 9px 11px; }
-    textarea { min-height: 120px; padding: 10px 11px; resize: vertical; line-height: 1.45; }
-    input, textarea, select {
-      box-shadow: inset 0 1px 0 rgba(255,255,255,.4);
-    }
+    textarea { min-height: 116px; padding: 10px 11px; resize: vertical; line-height: 1.45; }
     input:focus, textarea:focus, select:focus {
-      outline: 3px solid rgba(49, 95, 216, .18);
-      border-color: rgba(49, 95, 216, .54);
+      outline: 3px solid rgba(38, 99, 255, .16);
+      border-color: rgba(38, 99, 255, .5);
     }
     header {
       position: sticky;
       top: 10px;
-      z-index: 2;
-      display: grid;
-      grid-template-columns: 1fr auto;
+      z-index: 5;
+      width: min(1180px, calc(100% - 28px));
+      margin: 10px auto 0;
+      padding: 12px;
+      display: flex;
+      justify-content: space-between;
       gap: 12px;
       align-items: center;
-      width: min(1160px, calc(100% - 28px));
-      margin: 10px auto 0;
-      padding: 12px 14px;
-      background: var(--panel);
-      backdrop-filter: var(--blur);
-      -webkit-backdrop-filter: var(--blur);
       border: 1px solid var(--line);
       border-radius: 8px;
+      background: var(--glass);
+      backdrop-filter: var(--blur);
+      -webkit-backdrop-filter: var(--blur);
       box-shadow: var(--shadow);
     }
-    h1 { margin: 0; font-size: 20px; letter-spacing: 0; line-height: 1.1; }
-    .status { color: var(--muted); font-size: 13px; }
-    .brand-line { display: flex; align-items: center; gap: 10px; }
-    .app-mark {
-      width: 36px;
-      height: 36px;
+    h1, h2, h3, p { overflow-wrap: anywhere; }
+    h1 { margin: 0; font-size: 19px; line-height: 1.1; letter-spacing: 0; }
+    h2 { margin: 0; font-size: 15px; letter-spacing: 0; }
+    h3 { margin: 0; font-size: 15px; letter-spacing: 0; }
+    p { margin: 0; color: var(--muted); line-height: 1.45; }
+    label { display: grid; gap: 6px; color: var(--muted); font-size: 12px; font-weight: 760; text-transform: uppercase; letter-spacing: 0; }
+    .brand { display: flex; align-items: center; gap: 10px; min-width: 0; }
+    .mark {
+      width: 38px;
+      height: 38px;
       border-radius: 8px;
       display: grid;
       place-items: center;
       color: white;
-      background: linear-gradient(145deg, var(--accent), var(--accent-2));
-      box-shadow: 0 10px 24px rgba(23, 109, 103, .22);
-      font-weight: 800;
+      background: linear-gradient(135deg, var(--blue), var(--mint) 58%, var(--coral));
+      box-shadow: 0 14px 30px rgba(38, 99, 255, .22);
+      font-weight: 850;
     }
-    main { max-width: 1160px; margin: 0 auto; padding: 18px; display: grid; gap: 14px; }
-    .quick {
-      display: grid;
-      grid-template-columns: minmax(0, 1.1fr) minmax(280px, .9fr);
-      gap: 14px;
-      align-items: start;
-    }
+    .status { color: var(--muted); font-size: 12px; margin-top: 3px; }
+    .toolbar { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+    .primary { background: linear-gradient(135deg, var(--blue), #0ea5e9); color: #fff; border-color: transparent; font-weight: 760; box-shadow: 0 14px 28px rgba(38, 99, 255, .24); }
+    .mint { background: linear-gradient(135deg, var(--mint), #22c55e); color: white; border-color: transparent; font-weight: 760; }
+    .ghost { background: var(--soft); }
+    .danger { color: var(--coral); border-color: rgba(255, 107, 107, .32); background: rgba(255, 107, 107, .08); }
+    main { width: min(1180px, 100%); margin: 0 auto; padding: 16px 18px 28px; display: grid; gap: 14px; }
+    .hero { display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(280px, .8fr); gap: 14px; align-items: stretch; }
     .panel {
-      background: var(--panel);
       border: 1px solid var(--line);
       border-radius: 8px;
-      box-shadow: var(--shadow);
+      background: var(--glass);
       backdrop-filter: var(--blur);
       -webkit-backdrop-filter: var(--blur);
+      box-shadow: var(--shadow);
       overflow: hidden;
     }
-    .panel h2 {
-      margin: 0;
-      padding: 14px;
-      font-size: 16px;
-      border-bottom: 1px solid var(--line);
-      background: rgba(255,255,255,.28);
-      display: flex;
-      align-items: center;
-      gap: 9px;
-    }
-    form, .panel-body { padding: 14px; display: grid; gap: 10px; }
-    label { display: grid; gap: 6px; color: var(--muted); font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0; }
-    .row { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
-    .toolbar { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
-    .primary {
-      background: linear-gradient(145deg, var(--accent), var(--accent-2));
-      color: white;
-      border-color: transparent;
-      font-weight: 700;
-      box-shadow: 0 12px 26px rgba(23, 109, 103, .22);
-    }
-    .ghost { background: var(--soft); }
-    .danger { color: var(--danger); border-color: #efb6bf; background: #fff5f6; }
-    .tabs { display: flex; gap: 8px; overflow-x: auto; padding-bottom: 2px; }
-    .tabs button { white-space: nowrap; }
-    .tabs button.active { background: var(--accent-soft); border-color: rgba(23, 109, 103, .4); color: var(--accent); font-weight: 700; }
+    .panel-head { min-height: 48px; padding: 13px 14px; display: flex; align-items: center; justify-content: space-between; gap: 10px; border-bottom: 1px solid var(--line); background: rgba(255,255,255,.24); }
+    .panel-body { padding: 14px; display: grid; gap: 12px; }
+    .hero-brief { min-height: 210px; display: grid; align-content: space-between; background: linear-gradient(145deg, rgba(38, 99, 255, .12), rgba(18, 184, 134, .11), rgba(255, 107, 107, .09)); }
+    .brief-title { font-size: clamp(24px, 5vw, 44px); line-height: 1; letter-spacing: 0; margin: 0; max-width: 780px; }
+    .brief-copy { font-size: 15px; max-width: 720px; color: var(--muted); }
+    .metric-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+    .metric { min-height: 92px; padding: 12px; border: 1px solid var(--line); border-radius: 8px; background: var(--glass-strong); display: grid; align-content: space-between; }
+    .metric strong { font-size: 27px; line-height: 1; letter-spacing: 0; }
+    .metric span { color: var(--muted); font-size: 12px; }
+    .accent-blue { color: var(--blue); }
+    .accent-mint { color: var(--mint); }
+    .accent-coral { color: var(--coral); }
+    .accent-amber { color: var(--amber); }
+    .grid { display: grid; grid-template-columns: minmax(0, .95fr) minmax(0, 1.05fr); gap: 14px; align-items: start; }
+    .row { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+    form { display: grid; gap: 10px; }
+    .tabs { display: flex; gap: 8px; overflow-x: auto; padding: 2px; }
+    .tabs button { white-space: nowrap; background: var(--soft); }
+    .tabs button.active { color: #fff; background: linear-gradient(135deg, var(--blue), var(--violet)); border-color: transparent; font-weight: 760; }
     .search { display: grid; grid-template-columns: 1fr auto; gap: 8px; }
     .list { display: grid; gap: 10px; }
-    .item {
-      border: 1px solid var(--line);
-      border-radius: 8px;
-      background: var(--panel-strong);
-      padding: 12px;
-      display: grid;
-      gap: 8px;
-      box-shadow: 0 10px 30px rgba(24, 35, 44, .07);
-      animation: riseIn .28s ease both;
-    }
-    .item.done { opacity: .62; }
-    .item-head { display: flex; justify-content: space-between; gap: 10px; align-items: start; }
-    .item h3 { margin: 0; font-size: 15px; line-height: 1.25; overflow-wrap: anywhere; }
-    .item p { margin: 0; color: #3b4651; line-height: 1.45; white-space: pre-wrap; overflow-wrap: anywhere; }
-    @media (prefers-color-scheme: dark) { .item p { color: #d5dde6; } }
+    .item { padding: 12px; display: grid; gap: 8px; border: 1px solid var(--line); border-radius: 8px; background: var(--glass-strong); box-shadow: 0 12px 32px rgba(15, 23, 42, .07); animation: riseIn .22s ease both; }
+    .item.done { opacity: .56; }
+    .item-head { display: flex; align-items: start; justify-content: space-between; gap: 10px; }
     .meta { display: flex; flex-wrap: wrap; gap: 6px; }
     .chip { min-height: 25px; display: inline-flex; align-items: center; border-radius: 999px; padding: 0 9px; background: var(--soft); color: var(--muted); font-size: 12px; }
-    .chip.hot { background: #fff0f2; color: var(--danger); }
-    .chip.soon { background: #fff4df; color: var(--warn); }
-    .brief {
-      border-left: 0;
-      background:
-        linear-gradient(135deg, rgba(255,255,255,.72), rgba(255,255,255,.42)),
-        linear-gradient(145deg, rgba(242, 190, 99, .18), rgba(23, 109, 103, .12));
-      position: relative;
-    }
-    .brief::before {
-      content: "";
-      position: absolute;
-      inset: 0 auto 0 0;
-      width: 4px;
-      background: linear-gradient(var(--warn), var(--accent));
-    }
-    .brief p { margin: 0; color: #5c421d; line-height: 1.45; }
-    @media (prefers-color-scheme: dark) { .brief p { color: #f2dfbd; } }
-    .empty { padding: 30px; border: 1px dashed #bdc6ce; border-radius: 8px; color: var(--muted); text-align: center; }
-    .login-screen {
-      position: fixed;
-      inset: 0;
-      z-index: 20;
-      display: grid;
-      place-items: center;
-      padding: 18px;
-      background: #eef3f4;
-    }
-    .login-box {
-      width: min(440px, 100%);
-      background: var(--panel);
-      border: 1px solid var(--line);
-      border-radius: 8px;
-      box-shadow: 0 14px 44px rgba(34, 42, 49, .12);
-      padding: 18px;
-      display: grid;
-      gap: 12px;
-    }
-    .login-box h2 { margin: 0; font-size: 18px; }
-    .login-box p { margin: 0; color: var(--muted); line-height: 1.45; }
-    .login-error { color: var(--danger); min-height: 20px; font-size: 13px; }
-    .icon {
-      width: 19px;
-      height: 19px;
-      display: inline-block;
-      vertical-align: -4px;
-      flex: 0 0 auto;
-    }
-    .tab-label {
-      display: inline-flex;
-      align-items: center;
-      gap: 7px;
-    }
-    @keyframes riseIn {
-      from { opacity: 0; transform: translateY(8px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
+    .chip.hot { background: rgba(255, 107, 107, .14); color: var(--coral); }
+    .chip.soon { background: rgba(245, 159, 0, .16); color: var(--amber); }
+    .chip.email { background: rgba(38, 99, 255, .12); color: var(--blue); }
+    .empty { padding: 28px; text-align: center; color: var(--muted); border: 1px dashed var(--line); border-radius: 8px; }
+    .flow { display: grid; gap: 10px; }
+    .flow-step { display: grid; grid-template-columns: 34px 1fr; gap: 10px; align-items: start; padding: 11px; border: 1px solid var(--line); border-radius: 8px; background: var(--glass-strong); }
+    .dot { width: 30px; height: 30px; border-radius: 999px; display: grid; place-items: center; color: white; font-weight: 800; background: linear-gradient(135deg, var(--mint), var(--blue)); }
     .hidden { display: none; }
-    @media (max-width: 780px) {
-      body { padding-bottom: 86px; }
-      header, .quick, .row, .search { grid-template-columns: 1fr; }
+    @keyframes riseIn { from { opacity: 0; transform: translateY(7px); } to { opacity: 1; transform: translateY(0); } }
+    @media (max-width: 860px) {
+      body { padding-bottom: 84px; }
+      header { width: calc(100% - 20px); top: 8px; }
       main { padding: 12px; }
-      header {
-        position: sticky;
-        top: 8px;
-        width: calc(100% - 20px);
-        margin-top: 8px;
-      }
-      .toolbar button { flex: 1 1 120px; }
-      .tabs {
-        position: fixed;
-        left: 10px;
-        right: 10px;
-        bottom: max(10px, env(safe-area-inset-bottom));
-        z-index: 10;
-        padding: 8px;
-        border: 1px solid var(--line);
-        border-radius: 8px;
-        background: var(--panel);
-        backdrop-filter: var(--blur);
-        -webkit-backdrop-filter: var(--blur);
-        box-shadow: var(--shadow);
-        justify-content: space-between;
-        overflow-x: auto;
-      }
-      .tabs button {
-        min-width: 54px;
-        min-height: 50px;
-        padding: 5px 8px;
-      }
-      .tab-label {
-        display: grid;
-        justify-items: center;
-        gap: 3px;
-        font-size: 11px;
-      }
-      .tab-label .icon {
-        width: 20px;
-        height: 20px;
-      }
+      .hero, .grid, .row, .search { grid-template-columns: 1fr; }
+      .tabs { position: fixed; left: 10px; right: 10px; bottom: max(10px, env(safe-area-inset-bottom)); z-index: 10; padding: 8px; border: 1px solid var(--line); border-radius: 8px; background: var(--glass); backdrop-filter: var(--blur); -webkit-backdrop-filter: var(--blur); box-shadow: var(--shadow); justify-content: space-between; }
+      .tabs button { min-width: 56px; padding: 0 10px; }
     }
   </style>
 </head>
 <body>
   <header>
-    <div>
-      <div class="brand-line">
-        <div class="app-mark">AI</div>
-        <div>
-          <h1>Assistente IA</h1>
-          <div class="status" id="status">Connessione...</div>
-        </div>
+    <div class="brand">
+      <div class="mark">AI</div>
+      <div>
+        <h1>Second Brain</h1>
+        <div class="status" id="status">Connessione...</div>
       </div>
     </div>
     <div class="toolbar">
-      <button class="primary" id="installBtn">＋ Home</button>
+      <button class="ghost" id="exportBtn">Esporta</button>
+      <button class="primary" id="installBtn">+ Home</button>
     </div>
   </header>
 
   <main>
-    <section class="panel brief">
-      <h2><span class="icon">◌</span>Brief operativo</h2>
-      <div class="panel-body"><p id="briefText">Carico memoria e priorita.</p></div>
+    <section class="hero">
+      <div class="panel hero-brief">
+        <div class="panel-body">
+          <p class="chip">Briefing operativo</p>
+          <h2 class="brief-title" id="briefTitle">Priorita chiare, meno rumore.</h2>
+          <p class="brief-copy" id="briefText">Carico memoria, task, email e prossime azioni.</p>
+        </div>
+        <div class="panel-body">
+          <div class="toolbar">
+            <button class="mint" id="morningBtn">Brief 9:00</button>
+            <button class="ghost" id="afternoonBtn">Check 14:00</button>
+          </div>
+        </div>
+      </div>
+      <div class="metric-grid">
+        <div class="metric"><span>Aperte</span><strong class="accent-blue" id="mOpen">0</strong></div>
+        <div class="metric"><span>Urgenti</span><strong class="accent-coral" id="mUrgent">0</strong></div>
+        <div class="metric"><span>Email AI</span><strong class="accent-mint" id="mEmail">0</strong></div>
+        <div class="metric"><span>Oggi</span><strong class="accent-amber" id="mToday">0</strong></div>
+      </div>
     </section>
 
-    <section class="quick">
+    <section class="grid">
       <div class="panel">
-        <h2><span class="icon">＋</span>Cattura rapida</h2>
-        <form id="form">
-          <label>Titolo
-            <input id="title" placeholder="Es. Richiamare cliente, idea, cosa da fare">
-          </label>
-          <label>Nota
-            <textarea id="body" placeholder="Scrivi o detta dal telefono. Usa #tag, @persona, oggi, domani, urgente."></textarea>
-          </label>
-          <div class="row">
-            <label>Tipo
-              <select id="kind">
-                <option value="task">Attivita</option>
-                <option value="note">Nota</option>
-                <option value="person">Persona</option>
-                <option value="project">Progetto</option>
-              </select>
-            </label>
-            <label>Priorita
-              <select id="priority">
-                <option value="normal">Normale</option>
-                <option value="high">Alta</option>
-                <option value="low">Bassa</option>
-              </select>
-            </label>
-          </div>
-          <div class="row">
-            <label>Scadenza
-              <input id="due" type="date">
-            </label>
-            <label>Tag
-              <input id="tags" placeholder="#lavoro, @mario">
-            </label>
-          </div>
-          <div class="toolbar">
-            <button class="primary" type="submit">Salva</button>
-            <button class="ghost" type="button" id="smartBtn">Analizza</button>
-            <button type="button" id="clearBtn">Svuota</button>
-          </div>
-        </form>
+        <div class="panel-head">
+          <h2>Cattura rapida</h2>
+          <button class="ghost" type="button" id="smartBtn">Analizza</button>
+        </div>
+        <div class="panel-body">
+          <form id="form">
+            <label>Titolo<input id="title" placeholder="Es. Rispondere a Marco, idea, cosa da fare"></label>
+            <label>Dettagli<textarea id="body" placeholder="Scrivi o detta. Puoi usare #tag, @persona, oggi, domani, urgente, email."></textarea></label>
+            <div class="row">
+              <label>Tipo<select id="kind"><option value="task">Attivita</option><option value="email">Email</option><option value="brief">Briefing</option><option value="note">Nota</option><option value="person">Persona</option><option value="project">Progetto</option></select></label>
+              <label>Priorita<select id="priority"><option value="normal">Normale</option><option value="high">Alta</option><option value="low">Bassa</option></select></label>
+            </div>
+            <div class="row">
+              <label>Scadenza<input id="due" type="date"></label>
+              <label>Tag<input id="tags" placeholder="#lavoro, @mario"></label>
+            </div>
+            <div class="toolbar">
+              <button class="primary" type="submit">Salva</button>
+              <button type="button" id="clearBtn">Svuota</button>
+            </div>
+          </form>
+        </div>
       </div>
 
       <div class="panel">
-        <h2><span class="icon">◇</span>Uso ovunque</h2>
+        <div class="panel-head">
+          <h2>Gmail AI</h2>
+          <button class="ghost" id="emailTemplateBtn">Crea regola</button>
+        </div>
         <div class="panel-body">
-          <p>Apri questa pagina da iPhone, iPad o Mac. Se e pubblicata su Netlify funziona anche fuori casa; se e locale serve la stessa Wi‑Fi.</p>
-          <p>Per catture via email: manda una mail a te stesso con oggetto <strong>Second Brain</strong> o applica l’etichetta Gmail <strong>Second Brain</strong>.</p>
-          <p>Per farti preparare risposte: applica l’etichetta <strong>AI/Da rispondere</strong>. La bozza verra lasciata in Gmail e marcata come <strong>AI/Bozza preparata</strong>.</p>
-          <p>Le automazioni delle 9 e delle 14 leggeranno questo archivio e controlleranno Gmail/Calendar quando autorizzati. L’invio email resta con conferma tua.</p>
+          <div class="flow">
+            <div class="flow-step"><div class="dot">1</div><div><h3>Lettura intelligente</h3><p>Le automazioni Codex controllano Gmail alle 9 e alle 14, leggono le email importanti e trasformano cio che serve in task o note.</p></div></div>
+            <div class="flow-step"><div class="dot">2</div><div><h3>Risposte preparate</h3><p>Le email con etichetta AI/Da rispondere generano una bozza in Gmail. L'invio resta manuale, cosi non parte nulla senza controllo.</p></div></div>
+            <div class="flow-step"><div class="dot">3</div><div><h3>Brief personale</h3><p>Promemoria, calendario, email e priorita finiscono in un riepilogo operativo giornaliero.</p></div></div>
+          </div>
+          <div class="toolbar">
+            <button class="primary" id="addEmailBtn">Aggiungi email da gestire</button>
+            <button class="ghost" id="draftBtn">Promemoria bozza</button>
+          </div>
         </div>
       </div>
     </section>
 
     <section class="tabs" id="tabs">
-      <button class="active" data-view="today"><span class="tab-label"><span class="icon">◎</span><span>Oggi</span></span></button>
-      <button data-view="tasks"><span class="tab-label"><span class="icon">□</span><span>Attivita</span></span></button>
-      <button data-view="notes"><span class="tab-label"><span class="icon">◇</span><span>Note</span></span></button>
-      <button data-view="people"><span class="tab-label"><span class="icon">@</span><span>Persone</span></span></button>
-      <button data-view="projects"><span class="tab-label"><span class="icon">#</span><span>Progetti</span></span></button>
-      <button data-view="all"><span class="tab-label"><span class="icon">⌕</span><span>Tutto</span></span></button>
+      <button class="active" data-view="today">Oggi</button>
+      <button data-view="emails">Email</button>
+      <button data-view="tasks">Task</button>
+      <button data-view="briefs">Brief</button>
+      <button data-view="notes">Note</button>
+      <button data-view="all">Tutto</button>
     </section>
 
     <section class="search">
       <input id="search" type="search" placeholder="Cerca nella memoria...">
-      <button id="exportBtn">Esporta JSON</button>
+      <button id="seedBtn">Esempio AI</button>
     </section>
-
     <section class="list" id="list"></section>
     <div class="empty hidden" id="empty">Niente qui per ora. Cattura qualcosa e diventa subito memoria utile.</div>
   </main>
 
   <script>
     const api = "/api/items";
-    const todayISO = () => new Date().toISOString().slice(0, 10);
     const el = id => document.getElementById(id);
     const state = { items: [], view: "today", deferredInstall: null };
+    const todayISO = () => new Date().toISOString().slice(0, 10);
+    const fields = { title: el("title"), body: el("body"), kind: el("kind"), priority: el("priority"), due: el("due"), tags: el("tags") };
 
-    const fields = {
-      title: el("title"),
-      body: el("body"),
-      kind: el("kind"),
-      priority: el("priority"),
-      due: el("due"),
-      tags: el("tags")
-    };
-
-    function tagsFrom(text) {
-      return [...new Set((text.match(/[#@][\p{L}\p{N}_-]+/gu) || []).map(tag => tag.toLowerCase()))];
-    }
-
-    function normalizeTags(text) {
-      return [...new Set(String(text || "").split(/[,\s]+/).filter(Boolean).map(tag => tag.startsWith("#") || tag.startsWith("@") ? tag : "#" + tag))];
-    }
-
+    function plusDays(days) { const date = new Date(); date.setDate(date.getDate() + days); return date.toISOString().slice(0, 10); }
+    function tagsFrom(text) { return [...new Set((text.match(/[#@][\p{L}\p{N}_-]+/gu) || []).map(tag => tag.toLowerCase()))]; }
+    function normalizeTags(text) { return [...new Set(String(text || "").split(/[,\s]+/).filter(Boolean).map(tag => tag.startsWith("#") || tag.startsWith("@") ? tag : "#" + tag))]; }
     function infer(text) {
       const lower = text.toLowerCase();
       const due = lower.includes("domani") ? plusDays(1) : lower.includes("oggi") ? todayISO() : "";
-      const priority = /\b(urgente|subito|importante|scadenza|deadline)\b/.test(lower) ? "high" : "normal";
+      const priority = /\b(urgente|subito|importante|scadenza|deadline|sollecito)\b/.test(lower) ? "high" : "normal";
       let kind = "note";
-      if (/\b(devo|fare|ricordami|pagare|inviare|chiamare|prenotare)\b/.test(lower)) kind = "task";
+      if (/\b(mail|email|gmail|rispondere|bozza)\b/.test(lower)) kind = "email";
+      else if (/\b(devo|fare|ricordami|pagare|inviare|chiamare|prenotare)\b/.test(lower)) kind = "task";
       if (/@[\p{L}\p{N}_-]+/u.test(text)) kind = "person";
       if (/\bprogetto|roadmap|milestone\b/.test(lower)) kind = "project";
       return { due, priority, kind };
     }
-
-    function plusDays(days) {
-      const date = new Date();
-      date.setDate(date.getDate() + days);
-      return date.toISOString().slice(0, 10);
-    }
-
-    function titleFrom(text) {
-      const clean = text.replace(/\s+/g, " ").trim();
-      return clean.length > 70 ? clean.slice(0, 67) + "..." : clean || "Nuovo elemento";
-    }
+    function titleFrom(text) { const clean = text.replace(/\s+/g, " ").trim(); return clean.length > 70 ? clean.slice(0, 67) + "..." : clean || "Nuovo elemento"; }
 
     async function load() {
       const res = await fetch(api);
@@ -431,45 +301,29 @@
       el("status").textContent = `Sincronizzato: ${state.items.length} elementi`;
       render();
     }
-
     async function saveItem(item) {
-      const res = await fetch(api, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(item)
-      });
+      const res = await fetch(api, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(item) });
       const data = await res.json();
       state.items = data.items || [];
       render();
     }
-
     async function patchItem(id, patch) {
-      const res = await fetch(`${api}/${encodeURIComponent(id)}`, {
-        method: "PATCH",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(patch)
-      });
+      const res = await fetch(`${api}/${encodeURIComponent(id)}`, { method: "PATCH", headers: { "Content-Type": "application/json" }, body: JSON.stringify(patch) });
       const data = await res.json();
       state.items = data.items || [];
       render();
     }
-
     async function deleteItem(id) {
       const res = await fetch(`${api}/${encodeURIComponent(id)}`, { method: "DELETE" });
       const data = await res.json();
       state.items = data.items || [];
       render();
     }
-
-    function filtered() {
+    function visibleItems() {
       const q = el("search").value.trim().toLowerCase();
       return state.items.filter(item => {
-        const today = !item.done && (item.due === todayISO() || item.priority === "high" || (item.kind === "task" && !item.due));
-        const viewOk = state.view === "today" ? today :
-          state.view === "tasks" ? item.kind === "task" :
-          state.view === "notes" ? item.kind === "note" :
-          state.view === "people" ? item.kind === "person" :
-          state.view === "projects" ? item.kind === "project" : true;
+        const isToday = !item.done && (item.due === todayISO() || item.priority === "high" || (item.kind === "task" && !item.due) || item.kind === "email");
+        const viewOk = state.view === "today" ? isToday : state.view === "emails" ? item.kind === "email" : state.view === "tasks" ? item.kind === "task" : state.view === "briefs" ? item.kind === "brief" : state.view === "notes" ? ["note", "person", "project"].includes(item.kind) : true;
         const searchOk = !q || `${item.title} ${item.body} ${(item.tags || []).join(" ")}`.toLowerCase().includes(q);
         return viewOk && searchOk;
       }).sort((a, b) => {
@@ -479,137 +333,65 @@
         return (a.due || "9999").localeCompare(b.due || "9999");
       });
     }
-
     function render() {
-      const items = filtered();
+      const items = visibleItems();
       el("list").innerHTML = "";
       el("empty").classList.toggle("hidden", items.length !== 0);
       items.forEach(item => el("list").appendChild(itemNode(item)));
-      const open = state.items.filter(i => !i.done && i.kind === "task");
+      const open = state.items.filter(i => !i.done);
+      const tasks = open.filter(i => i.kind === "task");
       const urgent = open.filter(i => i.priority === "high" || i.due === todayISO() || (i.due && i.due < todayISO()));
-      const top = open.slice(0, 3).map(i => i.title);
-      el("briefText").textContent = `${urgent.length ? urgent.length + " urgenze/scadenze. " : "Nessuna urgenza evidente. "}${top.length ? "Priorita: " + top.join("; ") + "." : "Aggiungi la prossima cosa da gestire."}`;
+      const emails = open.filter(i => i.kind === "email");
+      const today = open.filter(i => i.due === todayISO());
+      el("mOpen").textContent = open.length;
+      el("mUrgent").textContent = urgent.length;
+      el("mEmail").textContent = emails.length;
+      el("mToday").textContent = today.length;
+      const top = [...urgent, ...tasks].slice(0, 3).map(i => i.title);
+      el("briefTitle").textContent = urgent.length ? `${urgent.length} cose da chiudere` : "Giornata sotto controllo";
+      el("briefText").textContent = `${emails.length ? emails.length + " email da gestire. " : ""}${top.length ? "Priorita: " + top.join("; ") + "." : "Aggiungi task, note o email e io li tengo in ordine."}`;
     }
-
     function itemNode(item) {
       const node = document.createElement("article");
       const soon = item.due && !item.done && item.due <= plusDays(3);
       node.className = "item" + (item.done ? " done" : "");
-      node.innerHTML = `
-        <div class="item-head">
-          <h3>${escapeHtml(item.title)}</h3>
-          <button title="${item.done ? "Riapri" : "Completa"}" data-action="done">${item.done ? "Riapri" : "✓"}</button>
-        </div>
-        <p>${escapeHtml(item.body || "")}</p>
-        <div class="meta">
-          <span class="chip">${labelKind(item.kind)}</span>
-          <span class="chip ${item.priority === "high" ? "hot" : ""}">${labelPriority(item.priority)}</span>
-          ${item.due ? `<span class="chip ${soon ? "soon" : ""}">${formatDate(item.due)}</span>` : ""}
-          ${(item.tags || []).map(tag => `<span class="chip">${escapeHtml(tag)}</span>`).join("")}
-        </div>
-        <div class="toolbar">
-          <button data-action="today">Oggi</button>
-          <button data-action="edit">Modifica</button>
-          <button class="danger" data-action="delete">Elimina</button>
-        </div>`;
+      node.innerHTML = `<div class="item-head"><h3>${escapeHtml(item.title)}</h3><button title="${item.done ? "Riapri" : "Completa"}" data-action="done">${item.done ? "Riapri" : "✓"}</button></div><p>${escapeHtml(item.body || "")}</p><div class="meta"><span class="chip ${item.kind === "email" ? "email" : ""}">${labelKind(item.kind)}</span><span class="chip ${item.priority === "high" ? "hot" : ""}">${labelPriority(item.priority)}</span>${item.due ? `<span class="chip ${soon ? "soon" : ""}">${formatDate(item.due)}</span>` : ""}${(item.tags || []).map(tag => `<span class="chip">${escapeHtml(tag)}</span>`).join("")}</div><div class="toolbar"><button data-action="today">Oggi</button><button data-action="draft">Bozza</button><button data-action="edit">Modifica</button><button class="danger" data-action="delete">Elimina</button></div>`;
       node.querySelector('[data-action="done"]').onclick = () => patchItem(item.id, { done: !item.done });
       node.querySelector('[data-action="today"]').onclick = () => patchItem(item.id, { due: todayISO(), priority: item.priority === "low" ? "normal" : item.priority });
       node.querySelector('[data-action="delete"]').onclick = () => deleteItem(item.id);
-      node.querySelector('[data-action="edit"]').onclick = () => {
-        fields.title.value = item.title;
-        fields.body.value = item.body || "";
-        fields.kind.value = item.kind;
-        fields.priority.value = item.priority;
-        fields.due.value = item.due || "";
-        fields.tags.value = (item.tags || []).join(", ");
-        deleteItem(item.id);
-        scrollTo({ top: 0, behavior: "smooth" });
-      };
+      node.querySelector('[data-action="draft"]').onclick = () => patchItem(item.id, { kind: "email", tags: [...new Set([...(item.tags || []), "#bozza-ai"])] });
+      node.querySelector('[data-action="edit"]').onclick = () => { fields.title.value = item.title; fields.body.value = item.body || ""; fields.kind.value = item.kind; fields.priority.value = item.priority; fields.due.value = item.due || ""; fields.tags.value = (item.tags || []).join(", "); deleteItem(item.id); scrollTo({ top: 0, behavior: "smooth" }); };
       return node;
     }
-
-    function escapeHtml(value) {
-      return String(value).replaceAll("&", "&amp;").replaceAll("<", "&lt;").replaceAll(">", "&gt;").replaceAll('"', "&quot;").replaceAll("'", "&#039;");
-    }
-
-    function labelKind(kind) {
-      return { task: "Attivita", note: "Nota", person: "Persona", project: "Progetto" }[kind] || "Nota";
-    }
-
-    function labelPriority(priority) {
-      return { high: "Alta", normal: "Normale", low: "Bassa" }[priority] || "Normale";
-    }
-
-    function formatDate(value) {
-      return new Intl.DateTimeFormat("it-IT", { day: "2-digit", month: "short" }).format(new Date(value + "T12:00:00"));
-    }
-
+    function escapeHtml(value) { return String(value).replaceAll("&", "&amp;").replaceAll("<", "&lt;").replaceAll(">", "&gt;").replaceAll('"', "&quot;").replaceAll("'", "&#039;"); }
+    function labelKind(kind) { return { task: "Task", note: "Nota", person: "Persona", project: "Progetto", email: "Email AI", brief: "Brief" }[kind] || "Nota"; }
+    function labelPriority(priority) { return { high: "Alta", normal: "Normale", low: "Bassa" }[priority] || "Normale"; }
+    function formatDate(value) { return new Intl.DateTimeFormat("it-IT", { day: "2-digit", month: "short" }).format(new Date(value + "T12:00:00")); }
     el("form").addEventListener("submit", event => {
       event.preventDefault();
       const text = `${fields.title.value} ${fields.body.value}`;
       const auto = infer(text);
-      saveItem({
-        title: fields.title.value.trim() || titleFrom(fields.body.value),
-        body: fields.body.value.trim(),
-        kind: fields.kind.value || auto.kind,
-        priority: fields.priority.value || auto.priority,
-        due: fields.due.value || auto.due,
-        tags: [...new Set([...normalizeTags(fields.tags.value), ...tagsFrom(text)])],
-        source: "web-app"
-      });
+      saveItem({ title: fields.title.value.trim() || titleFrom(fields.body.value), body: fields.body.value.trim(), kind: fields.kind.value || auto.kind, priority: fields.priority.value || auto.priority, due: fields.due.value || auto.due, tags: [...new Set([...normalizeTags(fields.tags.value), ...tagsFrom(text)])], source: "web-app" });
       el("form").reset();
       fields.kind.value = "task";
       fields.priority.value = "normal";
     });
-
-    el("smartBtn").onclick = () => {
-      const auto = infer(`${fields.title.value} ${fields.body.value}`);
-      fields.kind.value = auto.kind;
-      fields.priority.value = auto.priority;
-      if (!fields.due.value) fields.due.value = auto.due;
-      fields.tags.value = [...new Set([...normalizeTags(fields.tags.value), ...tagsFrom(`${fields.title.value} ${fields.body.value}`)])].join(", ");
-      if (!fields.title.value.trim()) fields.title.value = titleFrom(fields.body.value);
-    };
-
+    el("smartBtn").onclick = () => { const text = `${fields.title.value} ${fields.body.value}`; const auto = infer(text); fields.kind.value = auto.kind; fields.priority.value = auto.priority; if (!fields.due.value) fields.due.value = auto.due; fields.tags.value = [...new Set([...normalizeTags(fields.tags.value), ...tagsFrom(text)])].join(", "); if (!fields.title.value.trim()) fields.title.value = titleFrom(fields.body.value); };
+    el("addEmailBtn").onclick = () => { fields.kind.value = "email"; fields.priority.value = "high"; fields.tags.value = "#gmail, #da-rispondere"; fields.title.value = "Email da gestire"; fields.body.focus(); };
+    el("draftBtn").onclick = () => saveItem({ title: "Preparare bozza Gmail", body: "Etichetta in Gmail la conversazione con AI/Da rispondere. Codex preparera una bozza e la lascera in Gmail per revisione.", kind: "email", priority: "normal", due: todayISO(), tags: ["#gmail", "#bozza-ai"], source: "assistant" });
+    el("emailTemplateBtn").onclick = () => saveItem({ title: "Regola Gmail AI", body: "Leggi email con etichette Second Brain e AI/Da rispondere. Estrai azioni, crea task, prepara bozze senza inviare, marca con AI/Bozza preparata.", kind: "brief", priority: "normal", tags: ["#gmail", "#automazione", "#regole"], source: "assistant" });
+    el("morningBtn").onclick = () => saveBrief("Brief 9:00", "Riepilogo mattutino: urgenze, agenda, email da gestire, prime 3 azioni.");
+    el("afternoonBtn").onclick = () => saveBrief("Check 14:00", "Check pomeridiano: cosa resta aperto, follow-up email, blocchi e prossime decisioni.");
+    function saveBrief(title, body) { saveItem({ title, body, kind: "brief", priority: "normal", due: todayISO(), tags: ["#briefing"], source: "assistant" }); }
+    el("seedBtn").onclick = () => saveItem({ title: "Rispondere a email cliente entro oggi", body: "Preparare risposta gentile: confermare ricezione, riepilogare prossimi passi, proporre una finestra per call. #gmail #cliente", kind: "email", priority: "high", due: todayISO(), tags: ["#gmail", "#cliente", "#bozza-ai"], source: "demo" });
     el("clearBtn").onclick = () => el("form").reset();
     el("search").oninput = render;
-    document.querySelectorAll("[data-view]").forEach(button => {
-      button.onclick = () => {
-        state.view = button.dataset.view;
-        document.querySelectorAll("[data-view]").forEach(btn => btn.classList.toggle("active", btn === button));
-        render();
-      };
-    });
-
-    el("exportBtn").onclick = () => {
-      const blob = new Blob([JSON.stringify({ version: 1, items: state.items }, null, 2)], { type: "application/json" });
-      const url = URL.createObjectURL(blob);
-      const a = document.createElement("a");
-      a.href = url;
-      a.download = `second-brain-${todayISO()}.json`;
-      a.click();
-      URL.revokeObjectURL(url);
-    };
-
-    window.addEventListener("beforeinstallprompt", event => {
-      event.preventDefault();
-      state.deferredInstall = event;
-    });
-
-    el("installBtn").onclick = async () => {
-      if (state.deferredInstall) {
-        state.deferredInstall.prompt();
-        state.deferredInstall = null;
-      } else {
-        alert("Su iPhone: Safari > Condividi > Aggiungi a schermata Home.");
-      }
-    };
-
+    document.querySelectorAll("[data-view]").forEach(button => { button.onclick = () => { state.view = button.dataset.view; document.querySelectorAll("[data-view]").forEach(btn => btn.classList.toggle("active", btn === button)); render(); }; });
+    el("exportBtn").onclick = () => { const blob = new Blob([JSON.stringify({ version: 1, items: state.items }, null, 2)], { type: "application/json" }); const url = URL.createObjectURL(blob); const a = document.createElement("a"); a.href = url; a.download = `second-brain-${todayISO()}.json`; a.click(); URL.revokeObjectURL(url); };
+    window.addEventListener("beforeinstallprompt", event => { event.preventDefault(); state.deferredInstall = event; });
+    el("installBtn").onclick = async () => { if (state.deferredInstall) { state.deferredInstall.prompt(); state.deferredInstall = null; } else { alert("Su iPhone: Safari > Condividi > Aggiungi alla schermata Home."); } };
     if ("serviceWorker" in navigator) navigator.serviceWorker.register("/service-worker.js").catch(() => {});
-    load().catch(error => {
-      el("status").textContent = "Server non raggiungibile";
-      el("briefText").textContent = error.message;
-    });
+    load().catch(error => { el("status").textContent = "Server non raggiungibile"; el("briefText").textContent = error.message; });
   </script>
 </body>
 </html>

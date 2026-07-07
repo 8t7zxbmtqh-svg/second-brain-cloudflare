@@ -1,4 +1,4 @@
-const cacheName = "second-brain-cloudflare-v1";
+const cacheName = "second-brain-cloudflare-v2";
 const assets = ["/", "/index.html", "/manifest.webmanifest", "/icon.svg"];
 
 self.addEventListener("install", event => {

@@ -1,76 +1,36 @@
-# Assistente IA Personale - Cloudflare
+# Second Brain AI - Cloudflare Worker
 
-Questa versione e pronta per **Cloudflare Pages + D1**.
+Webapp personale installabile su iPhone, iPad e Mac, con salvataggio su Cloudflare D1.
 
 ## Cosa contiene
 
-- `public/`: web app installabile su iPhone, iPad e Mac.
-- `functions/api/[[path]].js`: API Cloudflare Pages Functions.
-- `schema.sql`: tabella D1.
-- `wrangler.toml`: esempio di configurazione.
+- `worker.js`: Worker Cloudflare con API e asset statici.
+- `public/`: interfaccia web installabile come app.
+- `wrangler.toml`: configurazione Worker, Assets e D1.
+- `schema.sql`: tabella D1 opzionale, la app la crea anche automaticamente.
 
-## Deploy consigliato
+## Impostazioni Cloudflare
 
-Usa Cloudflare Pages collegato a un repository GitHub. Il caricamento diretto puo servire per siti statici, ma per Functions + D1 e molto piu affidabile usare Git.
+Build command: lascia vuoto.
 
-## Impostazioni Cloudflare Pages
-
-Build command:
+Deploy command:
 
 ```text
-npm install
+npx wrangler deploy
 ```
 
-Build output directory:
+Non-production deploy command:
 
 ```text
-public
+npx wrangler deploy
 ```
 
-Root directory:
+Path:
 
 ```text
 /
 ```
 
-## Database D1
+## Gmail AI
 
-1. Vai su Cloudflare Dashboard.
-2. Apri **Workers & Pages**.
-3. Apri **D1 SQL Database**.
-4. Crea un database chiamato:
-
-```text
-second-brain-db
-```
-
-5. Apri il progetto Pages.
-6. Vai in **Settings > Functions > D1 database bindings**.
-7. Aggiungi un binding:
-
-```text
-Variable name: DB
-Database: second-brain-db
-```
-
-La Function crea automaticamente la tabella al primo uso. Se vuoi inizializzarla manualmente, usa `schema.sql`.
-
-## Test
-
-Dopo il deploy apri:
-
-```text
-https://TUO-PROGETTO.pages.dev/api/health
-```
-
-Dovresti vedere:
-
-```json
-{"ok":true,"runtime":"cloudflare-pages","storage":"d1","authEnabled":false}
-```
-
-Poi apri:
-
-```text
-https://TUO-PROGETTO.pages.dev
-```
+La webapp mostra e organizza elementi di tipo `Email AI`, ma la lettura reale di Gmail e la preparazione delle bozze devono restare nelle automazioni Codex autorizzate. Le email non vengono inviate automaticamente: Codex prepara bozze e l'utente conferma da Gmail.
