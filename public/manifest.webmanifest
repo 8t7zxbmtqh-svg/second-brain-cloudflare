@@ -1,0 +1,15 @@
+{
+  "name": "Assistente IA Personale",
+  "short_name": "Second Brain",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#f5f7f8",
+  "theme_color": "#1f7a6d",
+  "icons": [
+    {
+      "src": "/icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml"
+    }
+  ]
+}
