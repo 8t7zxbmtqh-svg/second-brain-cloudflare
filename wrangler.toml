@@ -1,0 +1,15 @@
+name = "second-brain-cloudflare"
+main = "worker.js"
+compatibility_date = "2026-07-07"
+
+[assets]
+directory = "./public"
+binding = "ASSETS"
+
+[[d1_databases]]
+binding = "DB"
+database_name = "second-brain-db"
+database_id = "a799d0aa-fb3f-4aa8-bb64-6f8325129089"
+
+[vars]
+SECOND_BRAIN_PASSWORD = "cambia-questa-password"
